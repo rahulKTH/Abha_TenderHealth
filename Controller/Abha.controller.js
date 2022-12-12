@@ -24,7 +24,6 @@ function authToken() {
 
 
 export const InsertAbha = async (req, resp) => {
-    authToken();
     try {
         
 
