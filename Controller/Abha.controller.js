@@ -105,7 +105,7 @@ export const InsertAbha = async (req, resp) => {
                             {
                                 status:"200",
                                 Message:"success",
-                                data:JSON.parse(responce_data.txnId)
+                                data:responce_data
                             }
                         );
                     }else{
@@ -170,7 +170,7 @@ export const VerifyAbhaAbha = async (req, resp) => {
                             {
                                 status:"200",
                                 Message:"success",
-                                data:JSON.parse(responce_data)
+                                data:responce_data
                             }
                         );
                     }else{
@@ -233,7 +233,7 @@ export const InsertMobile = async (req, resp) => {
                             {
                                 status:"200",
                                 Message:"success",
-                                data:JSON.parse(responce_data)
+                                data:responce_data
                             }
                         );
                     }else{
@@ -295,7 +295,7 @@ export const VerifyAbhaMobile = async (req, resp) => {
                             {
                                 status:"200",
                                 Message:"success",
-                                data:JSON.parse(responce_data)
+                                data:responce_data
                             }
                         );
                     }else{
@@ -368,7 +368,7 @@ export const createHealthIdWithPreVerified = async (req, resp) => {
                                 {
                                     status:"200",
                                     Message:"success",
-                                    data:JSON.parse(respon_data)
+                                    data:respon_data
                                 }
                             );
                         }else{
