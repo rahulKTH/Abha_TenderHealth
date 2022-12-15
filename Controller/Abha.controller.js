@@ -97,15 +97,15 @@ export const InsertAbha = async (req, resp) => {
                     })
                 };
                 request(options, function (error, respon) {
-
                     var responce_data = JSON.parse(respon.body);
+                    console.log(responce_data);
                     if (error) throw new Error(error);
                     if(responce_data.code == undefined){
                         resp.send(
                             {
                                 status:"200",
                                 Message:"success",
-                                data:JSON.parse(responce_data.txnId)
+                                data:responce_data
                             }
                         );
                     }else{
