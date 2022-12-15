@@ -1,10 +1,10 @@
 import express from "express";
 import InsertAbha  from "./Routes/Abha.route.js";
 const app = express()
-console.log("Listening to APP")
+//console.log("Listening to APP")
 app.use(express.json());
 
-console.log("APP",app)
+//console.log("APP",app)
 app.use('/abha',InsertAbha);
 
 
