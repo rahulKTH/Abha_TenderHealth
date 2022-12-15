@@ -36,7 +36,7 @@ export const SearchMobile = async (req, resp) => {
                 request(options, function (error, response) {
                     var responce_data = JSON.parse(response.body);
                     if (error) throw new Error(error);
-                    if(responce_data.code == 'undefined'){
+                    if(responce_data.code == undefined){
                         resp.send(
                             {
                                 status:"200",
@@ -100,7 +100,7 @@ export const InsertAbha = async (req, resp) => {
 
                     var responce_data = JSON.parse(respon.body);
                     if (error) throw new Error(error);
-                    if(responce_data.code == 'undefined'){
+                    if(responce_data.code == undefined){
                         resp.send(
                             {
                                 status:"200",
@@ -165,7 +165,7 @@ export const VerifyAbhaAbha = async (req, resp) => {
                 request(options, function (error, response) {
                     var responce_data = JSON.parse(response.body);
                     if (error) throw new Error(error);
-                    if(responce_data.code == 'undefined'){
+                    if(responce_data.code == undefined){
                         resp.send(
                             {
                                 status:"200",
@@ -228,7 +228,7 @@ export const InsertMobile = async (req, resp) => {
                 request(options, function (error, respon) {
                     var responce_data = JSON.parse(respon.body);
                     if (error) throw new Error(error);
-                    if(responce_data.code == 'undefined'){
+                    if(responce_data.code == undefined){
                         resp.send(
                             {
                                 status:"200",
@@ -290,7 +290,7 @@ export const VerifyAbhaMobile = async (req, resp) => {
                 request(options, function (error, response) {
                     var responce_data = JSON.parse(response.body);
                     if (error) throw new Error(error);
-                    if(responce_data.code == 'undefined'){
+                    if(responce_data.code == undefined){
                         resp.send(
                             {
                                 status:"200",
@@ -363,7 +363,7 @@ export const createHealthIdWithPreVerified = async (req, resp) => {
                         if (err) throw err;
                             console.log(result);
                         });
-                        if(respon_data.code == 'undefined'){
+                        if(respon_data.code == undefined){
                             resp.send(
                                 {
                                     status:"200",
@@ -425,23 +425,13 @@ export const ForgotHealthId = async (req, resp) => {
                 request(options, function (error, response) {
                     if (error) throw new Error(error);
                     var respon_data = JSON.parse(response.body);
-                    if(respon_data.code == 'undefined'){
-                        resp.send(
-                            {
-                                status:"200",
-                                Message:"success",
-                                data:JSON.parse(respon_data)
-                            }
-                        );
-                    }else{
-                        resp.send(
-                            {
-                                status:"400",
-                                Message:"Failed",
-                                data:respon_data
-                            }
-                        );
-                    }
+                    resp.send(
+                        {
+                            status:"200",
+                            Message:"success",
+                            data:respon_data
+                        }
+                    );
                 });  
 
         });
@@ -498,12 +488,13 @@ export const FindHealthId = async (req, resp) => {
                 request(options, function (error, response) {
                     if (error) throw new Error(error);
                     var respon_data = JSON.parse(response.body);
-                    if(respon_data.code == 'undefined'){
+                    //console.log(respon_data.code);
+                    if(respon_data.code == undefined){
                         resp.send(
                             {
                                 status:"200",
                                 Message:"success",
-                                data:JSON.parse(respon_data)
+                                data:respon_data
                             }
                         );
                     }else{
