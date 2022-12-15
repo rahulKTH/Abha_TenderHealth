@@ -34,14 +34,26 @@ export const SearchMobile = async (req, resp) => {
                     })
                 };
                 request(options, function (error, response) {
+                    var responce_data = JSON.parse(response.body);
                     if (error) throw new Error(error);
-                    resp.send(
-                        {
-                            status:"200",
-                            Message:"success",
-                            data:JSON.parse(response.body)
-                        }
-                    );
+                    if(responce_data.code == 'undefined'){
+                        resp.send(
+                            {
+                                status:"200",
+                                Message:"success",
+                                data:responce_data
+                            }
+                        );
+                    }else{
+                        resp.send(
+                            {
+                                status:"400",
+                                Message:"Failed",
+                                data:responce_data
+                            }
+                        );
+                    }
+                    
                 });  
 
         });
@@ -85,16 +97,26 @@ export const InsertAbha = async (req, resp) => {
                     })
                 };
                 request(options, function (error, respon) {
-                    
+
+                    var responce_data = JSON.parse(respon.body);
                     if (error) throw new Error(error);
-                    var respon_data = JSON.parse(respon.body);
-                    resp.send(
-                        {
-                            status:"200",
-                            Message:"success",
-                            data:JSON.parse(respon_data.txnId)
-                        }
-                    );
+                    if(responce_data.code == 'undefined'){
+                        resp.send(
+                            {
+                                status:"200",
+                                Message:"success",
+                                data:JSON.parse(responce_data.txnId)
+                            }
+                        );
+                    }else{
+                        resp.send(
+                            {
+                                status:"400",
+                                Message:"Failed",
+                                data:responce_data
+                            }
+                        );
+                    }
                 });  
 
         });
@@ -141,14 +163,25 @@ export const VerifyAbhaAbha = async (req, resp) => {
                     })
                 };
                 request(options, function (error, response) {
+                    var responce_data = JSON.parse(response.body);
                     if (error) throw new Error(error);
-                    resp.send(
-                        {
-                            status:"200",
-                            Message:"success",
-                            data:JSON.parse(response.body)
-                        }
-                    );
+                    if(responce_data.code == 'undefined'){
+                        resp.send(
+                            {
+                                status:"200",
+                                Message:"success",
+                                data:JSON.parse(responce_data)
+                            }
+                        );
+                    }else{
+                        resp.send(
+                            {
+                                status:"400",
+                                Message:"Failed",
+                                data:responce_data
+                            }
+                        );
+                    }
                 });  
 
         });
@@ -193,15 +226,25 @@ export const InsertMobile = async (req, resp) => {
                     })
                 };
                 request(options, function (error, respon) {
-                    
+                    var responce_data = JSON.parse(respon.body);
                     if (error) throw new Error(error);
-                    resp.send(
-                        {
-                            status:"200",
-                            Message:"success",
-                            data:JSON.parse(respon.body)
-                        }
-                    );
+                    if(responce_data.code == 'undefined'){
+                        resp.send(
+                            {
+                                status:"200",
+                                Message:"success",
+                                data:JSON.parse(responce_data)
+                            }
+                        );
+                    }else{
+                        resp.send(
+                            {
+                                status:"400",
+                                Message:"Failed",
+                                data:responce_data
+                            }
+                        );
+                    }
                 });  
 
         });
@@ -245,14 +288,25 @@ export const VerifyAbhaMobile = async (req, resp) => {
                     })
                 };
                 request(options, function (error, response) {
+                    var responce_data = JSON.parse(response.body);
                     if (error) throw new Error(error);
-                    resp.send(
-                        {
-                            status:"200",
-                            Message:"success",
-                            data:JSON.parse(response.body)
-                        }
-                    );
+                    if(responce_data.code == 'undefined'){
+                        resp.send(
+                            {
+                                status:"200",
+                                Message:"success",
+                                data:JSON.parse(responce_data)
+                            }
+                        );
+                    }else{
+                        resp.send(
+                            {
+                                status:"400",
+                                Message:"Failed",
+                                data:responce_data
+                            }
+                        );
+                    }
                 });  
 
         });
@@ -304,18 +358,28 @@ export const createHealthIdWithPreVerified = async (req, resp) => {
                 };
                 request(options, function (error, response) {
                     if (error) throw new Error(error);
-                    var respon_data = JSON.parse(respon.body);
+                    var respon_data = JSON.parse(response.body);
                     db.query("INSERT INTO abha_user (`token`,`healthIdNumber`,`name`,`gender`,`yearofbirth`,`mothofbirth`,`dayofbirth`,`firstname`,`healthId`,`lastname`,`middlename`,`statecode`,`districtcode`,`statename`,`districtname`,`email`,`profilephoto`,`txnId`,`mobile`) VALUES ('"+respon_data.token+"','"+respon_data.healthIdNumber+"','"+respon_data.name+"','"+respon_data.gender+"','"+respon_data.yearOfBirth+"','"+respon_data.monthOfBirth+"','"+respon_data.dayOfBirth+"','"+respon_data.firstName+"','"+respon_data.healthId+"','"+respon_data.lastName+"','"+respon_data.middleName+"','"+respon_data.stateCode+"','"+respon_data.districtCode+"','"+respon_data.stateName+"','"+respon_data.districtName+"','"+respon_data.email+"','"+respon_data.profilePhoto+"','"+req.body.txnId+"','"+respon_data.mobile+"');", function (err, result, fields) {
                         if (err) throw err;
                             console.log(result);
                         });
-                        resp.send(
-                            {
-                                status:"200",
-                                Message:"success",
-                                data:JSON.parse(respon_data)
-                            }
-                        );
+                        if(respon_data.code == 'undefined'){
+                            resp.send(
+                                {
+                                    status:"200",
+                                    Message:"success",
+                                    data:JSON.parse(respon_data)
+                                }
+                            );
+                        }else{
+                            resp.send(
+                                {
+                                    status:"400",
+                                    Message:"Failed",
+                                    data:respon_data
+                                }
+                            );
+                        }
                 });  
 
         });
@@ -360,14 +424,24 @@ export const ForgotHealthId = async (req, resp) => {
                 };
                 request(options, function (error, response) {
                     if (error) throw new Error(error);
-                    resp.send(
-                        {
-                            status:"200",
-                            Message:"success",
-                            data:JSON.parse(response.body)
-                        }
-                    );
-
+                    var respon_data = JSON.parse(response.body);
+                    if(respon_data.code == 'undefined'){
+                        resp.send(
+                            {
+                                status:"200",
+                                Message:"success",
+                                data:JSON.parse(respon_data)
+                            }
+                        );
+                    }else{
+                        resp.send(
+                            {
+                                status:"400",
+                                Message:"Failed",
+                                data:respon_data
+                            }
+                        );
+                    }
                 });  
 
         });
@@ -423,13 +497,24 @@ export const FindHealthId = async (req, resp) => {
                 };
                 request(options, function (error, response) {
                     if (error) throw new Error(error);
-                    resp.send(
-                        {
-                            status:"200",
-                            Message:"success",
-                            data:JSON.parse(response.body)
-                        }
-                    );
+                    var respon_data = JSON.parse(response.body);
+                    if(respon_data.code == 'undefined'){
+                        resp.send(
+                            {
+                                status:"200",
+                                Message:"success",
+                                data:JSON.parse(respon_data)
+                            }
+                        );
+                    }else{
+                        resp.send(
+                            {
+                                status:"400",
+                                Message:"Failed",
+                                data:respon_data
+                            }
+                        );
+                    }
                 });  
 
         });
