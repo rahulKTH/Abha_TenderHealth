@@ -2,8 +2,6 @@ import request from "request";
 import db from "../Config/config.js";
 
 export const SearchMobile = async (req, resp) => {
-
-    console.log(req.body.aadhaar);
     try {
         
         var options = {
@@ -22,9 +20,7 @@ export const SearchMobile = async (req, resp) => {
             if (error)
                 throw new Error(error);
                 var response_data = JSON.parse(response.body);
-
                 var access_token = 'Bearer '+response_data.accessToken;
-                console.log(access_token);
                 
                 var options = {
                     'method': 'POST',
@@ -39,7 +35,13 @@ export const SearchMobile = async (req, resp) => {
                 };
                 request(options, function (error, response) {
                     if (error) throw new Error(error);
-                    resp.send({ success:true, message:response.body});
+                    resp.send(
+                        {
+                            status:"200",
+                            Message:"success",
+                            data:JSON.parse(response.body)
+                        }
+                    );
                 });  
 
         });
@@ -86,8 +88,13 @@ export const InsertAbha = async (req, resp) => {
                     
                     if (error) throw new Error(error);
                     var respon_data = JSON.parse(respon.body);
-                    console.log(respon_data);
-                    resp.send({ success:true, message:respon_data.txnId});
+                    resp.send(
+                        {
+                            status:"200",
+                            Message:"success",
+                            data:JSON.parse(respon_data.txnId)
+                        }
+                    );
                 });  
 
         });
@@ -135,7 +142,13 @@ export const VerifyAbhaAbha = async (req, resp) => {
                 };
                 request(options, function (error, response) {
                     if (error) throw new Error(error);
-                    resp.send({ success:true, message:response.body});
+                    resp.send(
+                        {
+                            status:"200",
+                            Message:"success",
+                            data:JSON.parse(response.body)
+                        }
+                    );
                 });  
 
         });
@@ -182,9 +195,13 @@ export const InsertMobile = async (req, resp) => {
                 request(options, function (error, respon) {
                     
                     if (error) throw new Error(error);
-                    
-                    resp.send({ success:true, message:respon_data.txnId});
-                    console.log(respon_data.txnId);
+                    resp.send(
+                        {
+                            status:"200",
+                            Message:"success",
+                            data:JSON.parse(respon.body)
+                        }
+                    );
                 });  
 
         });
@@ -229,7 +246,13 @@ export const VerifyAbhaMobile = async (req, resp) => {
                 };
                 request(options, function (error, response) {
                     if (error) throw new Error(error);
-                    resp.send({ success:true, message:response.body});
+                    resp.send(
+                        {
+                            status:"200",
+                            Message:"success",
+                            data:JSON.parse(response.body)
+                        }
+                    );
                 });  
 
         });
@@ -286,7 +309,13 @@ export const createHealthIdWithPreVerified = async (req, resp) => {
                         if (err) throw err;
                             console.log(result);
                         });
-                    resp.send({ success:true, message:respon_data});
+                        resp.send(
+                            {
+                                status:"200",
+                                Message:"success",
+                                data:JSON.parse(respon_data)
+                            }
+                        );
                 });  
 
         });
@@ -331,7 +360,13 @@ export const ForgotHealthId = async (req, resp) => {
                 };
                 request(options, function (error, response) {
                     if (error) throw new Error(error);
-                    resp.send({ success:true, message:response.body});
+                    resp.send(
+                        {
+                            status:"200",
+                            Message:"success",
+                            data:JSON.parse(response.body)
+                        }
+                    );
 
                 });  
 
@@ -388,7 +423,13 @@ export const FindHealthId = async (req, resp) => {
                 };
                 request(options, function (error, response) {
                     if (error) throw new Error(error);
-                    resp.send({ success:true, message:response.body});
+                    resp.send(
+                        {
+                            status:"200",
+                            Message:"success",
+                            data:JSON.parse(response.body)
+                        }
+                    );
                 });  
 
         });
@@ -398,15 +439,5 @@ export const FindHealthId = async (req, resp) => {
 }
 
 export const Getuserdata = async (req, resp) => {
-    console.log('5');
-    try {
-
-        //let  products = await request().query("SELECT * from Orders");
-
-        resp.send({ success:true, data:'5'});
-     } catch (e) {
-        resp.send({ success:false, message:e.message});
-     }
 
 }
-
