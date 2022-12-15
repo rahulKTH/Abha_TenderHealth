@@ -1,8 +1,8 @@
 import mysql from "mysql";
 var connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '',
+  host: 'deardoc-staging.cjtztruxn5wp.ap-south-1.rds.amazonaws.com',
+  user: 'admin',
+  password: 'U4UiK3kzK5t2IIdTZm7k',
   database: 'arogya_database_staging'
 })
 
