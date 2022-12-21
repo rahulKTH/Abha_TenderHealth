@@ -38,6 +38,8 @@ export const SearchUsingMobile = async (req, resp) => {
                 if (error) throw new Error(error);
                 if (responce_data.code == undefined) {
                     if (responce_data.length > 1) {
+
+                        console.log("Length greater than 1")
                         resp.send(
                             {
                                 status: "200",
@@ -561,6 +563,7 @@ export const FindHealthId = async (req, resp) => {
                 var respon_data = JSON.parse(response.body);
                 //console.log(respon_data.code);
                 if (respon_data.code == undefined) {
+                    
                     resp.send(
                         {
                             status: "200",
@@ -597,7 +600,7 @@ export const SearchAbhaById = async (req, resp) => {
             resp.send({ success: false, message: "Invalid request data!" });
         }
 
-        db.query(`SELECT healthId, healthIdNumber, name, gender, mobile FROM abha_user WHERE healthId="${abha_id}" AND healthIdNumber="${abha_number}"`,
+        db.query(`SELECT healthId, healthIdNumber, name, gender, mobile FROM abha_user WHERE healthIdNumber="${abha_number}"`,
             function (err, result, fields) {
                 if (err) {
                     resp.send({ success: false, message: err });
@@ -605,6 +608,40 @@ export const SearchAbhaById = async (req, resp) => {
                     //console.log(result, "sel res");
                     //console.log(fields);
                     resp.send({ success: true, message: "", data: result });
+                }
+            }
+        );
+    } catch (e) {
+        resp.send({ success: false, message: e.message });
+    };
+}
+
+
+export const SearchUserByMobileNumber = async (req, resp) => {
+    try {
+        const mobile_no = req.body.mobile_no || '';
+        const healthIdNumber = req.body.healthIdNumber || '';
+        if (mobile_no === '') {
+            resp.send({ status: "400", message: "mobile_no was not provided!", data: [] });
+        }
+        var addQ = "";
+        if (!!healthIdNumber) {
+            addQ = `AND healthIdNumber="${healthIdNumber}"`
+        }
+        db.query(`SELECT healthId, healthIdNumber, name, gender, mobile FROM abha_user WHERE mobile="${mobile_no}"` + addQ,
+            function (err, res, fields) {
+                if (err) {
+                    resp.send({ success: false, message: err });
+                } else {
+                    let result = Object.values(JSON.parse(JSON.stringify(res)));
+                    if (result.length == 0) {
+                        resp.send({ status: "400", message: "No Data Found!", data: [] });
+                    }
+                    else if (result.length > 1) {
+                        resp.send({ status: "200", message: "Sucess", data: result });
+                    } else {
+                        resp.send({ status: "200", message: "Sucess", data: result });
+                    }
                 }
             }
         );
@@ -823,3 +860,27 @@ export const AuthConfirmAdharOtp = async (req, resp) => {
         resp.send({ success: false, message: e.message });
     };
 }
+
+// export const SearchUserByHealthId = async (req, resp) => {
+//     try {
+//         const healthId = req.body.healthId || '';
+//         const abha_number = req.body.abha_number || '';
+//         if (abha_id === '' || abha_number === '') {
+//             resp.send({ success: false, message: "Invalid request data!" });
+//         }
+
+//         db.query(`SELECT healthId, healthIdNumber, name, gender, mobile FROM abha_user WHERE healthId="${abha_id}" AND healthIdNumber="${abha_number}"`,
+//             function (err, result, fields) {
+//                 if (err) {
+//                     resp.send({ success: false, message: err });
+//                 } else {
+//                     //console.log(result, "sel res");
+//                     //console.log(fields);
+//                     resp.send({ success: true, message: "", data: result });
+//                 }
+//             }
+//         );
+//     } catch (e) {
+//         resp.send({ success: false, message: e.message });
+//     };
+// }

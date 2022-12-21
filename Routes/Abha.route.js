@@ -9,7 +9,7 @@ import { Getuserdata } from "../Controller/Abha.controller.js";
 import { ResendOtpUsingMobile } from "../Controller/Abha.controller.js";
 import { ForgotHealthId } from "../Controller/Abha.controller.js";
 import { FindHealthId } from "../Controller/Abha.controller.js";
-import { SearchAbhaById, ResendAdharOtp, AuthInitAbha, AuthConfirmAdharOtp } from "../Controller/Abha.controller.js";
+import { SearchAbhaById, SearchUserByMobileNumber, ResendAdharOtp, AuthInitAbha, AuthConfirmAdharOtp } from "../Controller/Abha.controller.js";
 
 const router = express.Router();
 router.post("/search_using_mobile",SearchUsingMobile);
@@ -26,5 +26,5 @@ router.post("/search_using_abha_id",SearchAbhaById);
 router.post("/resend_adhar_otp",ResendAdharOtp);
 router.post("/login_abha",AuthInitAbha);
 router.post("/login_confirm_otp",AuthConfirmAdharOtp);
-
+router.post("/search_user_by_mobile",SearchUserByMobileNumber);
 export default router;
